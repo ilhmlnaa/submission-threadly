@@ -1,7 +1,6 @@
 describe('Login spec', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:5173/login', { timeout: 60000 });
-    cy.get('body', { timeout: 10000 }).should('be.visible');
+    cy.visit('http://localhost:5173/login');
   });
 
   it('should display login page correctly', () => {

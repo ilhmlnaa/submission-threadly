@@ -77,19 +77,25 @@ npm run build
 - **Unit Tests**: Reducers (authUser, threads) ✅
 - **Integration Tests**: Thunk actions (authUser, threads) ✅
 - **Component Tests**: LoginInput, ThreadItem, RegisterInput ✅
-- **E2E Tests**: Login flow ✅
+- **E2E Tests**: Login and Register flow ✅
 
 ### Test Stats
 ```
-Test Files:  7 passed
-Tests:       31 passed (100%)
+Test Files:  9 passed
+Tests:       37 passed (100%)
 ```
 
 ## Storybook
 
 Komponen yang didokumentasikan:
+
+### Auth
 - **LoginInput** - 3 stories (Default, Loading, WithValues)
-- **ThreadItem** - 6 stories (Default, WithUpVotes, WithDownVotes, etc.)
+- **RegisterInput** - 3 stories (Default, Loading, WithValues)
+
+### Thread
+- **ThreadItem** - 6 stories (Default, WithUpVotes, WithDownVotes, WithLotsOfComments, LongTitle, LongBody)
+- **ThreadInput** - 4 stories (Default, WithCancelButton, Loading, LongContent)
 
 Jalankan: `npm run storybook` → `http://localhost:6006`
 
@@ -98,18 +104,50 @@ Jalankan: `npm run storybook` → `http://localhost:6006`
 ```
 src/
 ├── components/      # Reusable UI components
-│   ├── auth/       # Login, Register inputs
-│   ├── thread/     # Thread card, form
-│   └── ...
-├── pages/          # Route pages (Home, Detail, etc.)
+│   ├── auth/       # LoginInput, RegisterInput
+│   ├── comment/    # Comment related components
+│   ├── common/     # Shared UI components
+│   ├── layout/     # Layout components (Header, Footer, etc.)
+│   ├── leaderboard/ # Leaderboard display components
+│   └── thread/     # ThreadItem, ThreadInput, CommentList, etc.
+├── pages/          # Route pages
+│   ├── HomePage.jsx
+│   ├── DetailPage.jsx
+│   ├── LoginPage.jsx
+│   ├── RegisterPage.jsx
+│   ├── LeaderboardsPage.jsx
+│   └── NotFoundPage.jsx
 ├── states/         # Redux slices
-│   ├── authUser/   # Auth state
-│   ├── threads/     # Threads state
-│   └── ...
+│   ├── authUser/   # Authentication state & actions
+│   ├── isPreload/  # Preloader state
+│   ├── language/   # Language state (i18n)
+│   ├── leaderboards/ # Leaderboard state
+│   ├── shared/     # Shared utilities
+│   ├── theme/      # Theme state (dark/light)
+│   ├── threadDetail/ # Thread detail state
+│   ├── threads/    # Threads state & actions
+│   └── users/      # Users state
 ├── hooks/          # Custom React hooks
-├── utils/          # Helper functions (API, i18n, etc.)
-├── layouts/        # Page layouts (Main, Auth)
-└── stories/        # Storybook stories
+│   ├── useInput.js
+│   ├── useLeaderboards.js
+│   ├── useThreadDetail.js
+│   └── useThreads.js
+├── utils/          # Helper functions
+│   ├── api.js      # API client
+│   ├── i18n.js     # i18next config
+│   └── ...
+├── layouts/        # Page layouts
+│   ├── AuthLayout.jsx
+│   └── MainLayout.jsx
+├── stories/        # Storybook stories
+│   ├── auth/       # Auth component stories
+│   └── thread/     # Thread component stories
+├── locales/        # Translation files
+├── __tests__/      # Unit & integration tests
+├── assets/         # Static assets
+├── App.jsx         # Main app component
+├── main.jsx        # Entry point
+└── index.css       # Global styles
 ```
 
 ## API
@@ -142,6 +180,14 @@ GitHub Actions workflow (`.github/workflows/ci.yml`):
 - Build verification
 
 ## Author
+
+**Ilham Maulana**
+
+Submission #2 - Menjadi React Web Developer Expert @ Dicoding Academy
+
+## License
+
+MITr
 
 **Ilham Maulana**
 

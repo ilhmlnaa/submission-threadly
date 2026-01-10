@@ -5,8 +5,7 @@ describe('Register spec', () => {
   const password = 'password12345678';
 
   beforeEach(() => {
-    cy.visit('http://localhost:5173/register', { timeout: 60000 });
-    cy.get('body', { timeout: 10000 }).should('be.visible');
+    cy.visit('http://localhost:5173/register');
   });
 
   it('should display register page correctly', () => {
