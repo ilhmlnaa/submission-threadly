@@ -15,7 +15,7 @@ import {
   X,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { asyncLogoutUser } from '../../states/shared/action';
+import { asyncLogoutUser } from '../../states/authUser/action';
 import { toggleThemeActionCreator } from '../../states/theme/action';
 import { LanguageSwitcher } from '../common';
 

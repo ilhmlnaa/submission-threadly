@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import CommentItem from './CommentItem';
 
-function CommentsList({ comments, authUser, upVote, downVote, neutralVote }) {
+function CommentsList({ comments }) {
   const { t } = useTranslation();
 
   if (comments.length === 0) {
@@ -17,14 +17,7 @@ function CommentsList({ comments, authUser, upVote, downVote, neutralVote }) {
   return (
     <div className="space-y-3">
       {comments.map((comment) => (
-        <CommentItem
-          key={comment.id}
-          {...comment}
-          authUser={authUser}
-          upVote={upVote}
-          downVote={downVote}
-          neutralVote={neutralVote}
-        />
+        <CommentItem key={comment.id} {...comment} />
       ))}
     </div>
   );
@@ -45,16 +38,6 @@ CommentsList.propTypes = {
       downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
     })
   ).isRequired,
-  authUser: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-  }),
-  upVote: PropTypes.func.isRequired,
-  downVote: PropTypes.func.isRequired,
-  neutralVote: PropTypes.func.isRequired,
-};
-
-CommentsList.defaultProps = {
-  authUser: null,
 };
 
 export default CommentsList;

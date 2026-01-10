@@ -2,18 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ThreadItem from './ThreadItem';
 
-function ThreadsList({ threads, authUser, upVote, downVote, neutralVote }) {
+function ThreadsList({ threads }) {
   return (
     <div className="space-y-4">
       {threads.map((thread) => (
-        <ThreadItem
-          key={thread.id}
-          {...thread}
-          authUser={authUser}
-          upVote={upVote}
-          downVote={downVote}
-          neutralVote={neutralVote}
-        />
+        <ThreadItem key={thread.id} {...thread} />
       ))}
     </div>
   );
@@ -37,16 +30,6 @@ ThreadsList.propTypes = {
       }).isRequired,
     })
   ).isRequired,
-  authUser: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-  }),
-  upVote: PropTypes.func.isRequired,
-  downVote: PropTypes.func.isRequired,
-  neutralVote: PropTypes.func.isRequired,
-};
-
-ThreadsList.defaultProps = {
-  authUser: null,
 };
 
 export default ThreadsList;

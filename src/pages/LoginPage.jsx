@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { LoginInput, PageTransition, AuthAside } from '../components';
-import { asyncLoginUser } from '../states/shared/action';
+import { asyncLoginUser } from '../states/authUser/action';
 
 function LoginPage() {
   const dispatch = useDispatch();

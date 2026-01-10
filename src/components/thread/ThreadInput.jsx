@@ -6,9 +6,9 @@ import useInput from '../../hooks/useInput';
 
 function ThreadInput({ addThread, onCancel, loading = false }) {
   const { t } = useTranslation();
-  const [title, onTitleChange, setTitle] = useInput('');
-  const [body, onBodyChange, setBody] = useInput('');
-  const [category, onCategoryChange, setCategory] = useInput('');
+  const { value: title, onChange: onTitleChange, setValue: setTitle } = useInput('');
+  const { value: body, onChange: onBodyChange, setValue: setBody } = useInput('');
+  const { value: category, onChange: onCategoryChange, setValue: setCategory } = useInput('');
 
   const onSubmit = (e) => {
     e.preventDefault();

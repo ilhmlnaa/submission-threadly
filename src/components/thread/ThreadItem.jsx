@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { ThumbsUp, ThumbsDown, MessageCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { postedAt } from '../../utils';
+import { postedAt, sanitizeHtml } from '../../utils';
+import {
+  asyncUpVoteThread,
+  asyncDownVoteThread,
+  asyncNeutralVoteThread,
+} from '../../states/threads/action';
 
 function ThreadItem({
   id,
@@ -16,12 +22,10 @@ function ThreadItem({
   downVotesBy,
   totalComments,
   user,
-  authUser,
-  upVote,
-  downVote,
-  neutralVote,
 }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const authUser = useSelector((states) => states.authUser);
 
   const isUpVoted = authUser && upVotesBy.includes(authUser.id);
   const isDownVoted = authUser && downVotesBy.includes(authUser.id);
@@ -33,9 +37,9 @@ function ThreadItem({
       return;
     }
     if (isUpVoted) {
-      neutralVote(id);
+      dispatch(asyncNeutralVoteThread(id));
     } else {
-      upVote(id);
+      dispatch(asyncUpVoteThread(id));
     }
   };
 
@@ -46,9 +50,9 @@ function ThreadItem({
       return;
     }
     if (isDownVoted) {
-      neutralVote(id);
+      dispatch(asyncNeutralVoteThread(id));
     } else {
-      downVote(id);
+      dispatch(asyncDownVoteThread(id));
     }
   };
 
@@ -102,7 +106,7 @@ function ThreadItem({
 
           <div
             className="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3"
-            dangerouslySetInnerHTML={{ __html: body }}
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(body) }}
           />
 
           <div className="flex items-center space-x-6">
@@ -163,16 +167,6 @@ ThreadItem.propTypes = {
     name: PropTypes.string.isRequired,
     avatar: PropTypes.string.isRequired,
   }).isRequired,
-  authUser: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-  }),
-  upVote: PropTypes.func.isRequired,
-  downVote: PropTypes.func.isRequired,
-  neutralVote: PropTypes.func.isRequired,
-};
-
-ThreadItem.defaultProps = {
-  authUser: null,
 };
 
 export default ThreadItem;

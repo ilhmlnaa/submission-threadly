@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PlusCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -13,43 +12,24 @@ import {
   PageTransition,
   ThreadItemSkeleton,
 } from '../components';
-import { asyncPopulateUsersAndThreads } from '../states/shared/action';
-import {
-  asyncCreateThread,
-  asyncUpVoteThread,
-  asyncDownVoteThread,
-  asyncNeutralVoteThread,
-} from '../states/threads/action';
+import useThreads from '../hooks/useThreads';
 
 function HomePage() {
   const {
-    threads = [],
-    users = [],
-    authUser = null,
-  } = useSelector((states) => states);
+    threads,
+    categories,
+    authUser,
+    createThread,
+  } = useThreads();
 
-  const dispatch = useDispatch();
   const { t } = useTranslation();
   const [showThreadInput, setShowThreadInput] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [isAddingThread, setIsAddingThread] = useState(false);
 
-  useEffect(() => {
-    dispatch(asyncPopulateUsersAndThreads());
-  }, [dispatch]);
-
-  const threadList = threads.map((thread) => ({
-    ...thread,
-    user: users.find((user) => user.id === thread.ownerId),
-  }));
-
-  const categories = [
-    ...new Set(threads.map((thread) => thread.category).filter(Boolean)),
-  ];
-
   const filteredThreads = selectedCategory
-    ? threadList.filter((thread) => thread.category === selectedCategory)
-    : threadList;
+    ? threads.filter((thread) => thread.category === selectedCategory)
+    : threads;
 
   const onAddThread = ({ title, body, category }) => {
     if (!authUser) {
@@ -62,7 +42,7 @@ function HomePage() {
     }
 
     setIsAddingThread(true);
-    dispatch(asyncCreateThread({ title, body, category }))
+    createThread({ title, body, category })
       .then(() => {
         setShowThreadInput(false);
         toast.success(t('homePage.threadCreated'));
@@ -70,18 +50,6 @@ function HomePage() {
       .finally(() => {
         setIsAddingThread(false);
       });
-  };
-
-  const onUpVote = (threadId) => {
-    dispatch(asyncUpVoteThread(threadId));
-  };
-
-  const onDownVote = (threadId) => {
-    dispatch(asyncDownVoteThread(threadId));
-  };
-
-  const onNeutralVote = (threadId) => {
-    dispatch(asyncNeutralVoteThread(threadId));
   };
 
   const onToggleThreadInput = () => {
@@ -169,13 +137,7 @@ function HomePage() {
                   </p>
                 </div>
               ) : (
-                <ThreadsList
-                  threads={filteredThreads}
-                  upVote={onUpVote}
-                  downVote={onDownVote}
-                  neutralVote={onNeutralVote}
-                  authUser={authUser}
-                />
+                <ThreadsList threads={filteredThreads} />
               )}
             </div>
 

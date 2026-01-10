@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import { RegisterInput, PageTransition, AuthAside } from '../components';
-import { asyncRegisterUser } from '../states/shared/action';
+import { asyncRegisterUser } from '../states/authUser/action';
 
 function RegisterPage() {
   const dispatch = useDispatch();

@@ -6,7 +6,7 @@ import useInput from '../../hooks/useInput';
 
 function CommentInput({ addComment, loading = false }) {
   const { t } = useTranslation();
-  const [content, onContentChange, setContent] = useInput('');
+  const { value: content, onChange: onContentChange, setValue: setContent } = useInput('');
 
   const onSubmit = (e) => {
     e.preventDefault();

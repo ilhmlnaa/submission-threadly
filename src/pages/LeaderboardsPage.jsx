@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Trophy } from 'lucide-react';
 import {
@@ -7,20 +6,11 @@ import {
   PageTransition,
   LeaderboardSkeleton,
 } from '../components';
-import { asyncReceiveLeaderboards } from '../states/leaderboards/action';
+import useLeaderboards from '../hooks/useLeaderboards';
 
 function LeaderboardsPage() {
-  const { leaderboards = [], loadingBar } = useSelector((states) => states);
-  const dispatch = useDispatch();
+  const { leaderboards, isLoading } = useLeaderboards();
   const { t } = useTranslation();
-
-  useEffect(() => {
-    dispatch(asyncReceiveLeaderboards());
-  }, [dispatch]);
-
-  const isLoading =
-    loadingBar?.default > 0 ||
-    (leaderboards.length === 0 && loadingBar?.default === undefined);
 
   return (
     <PageTransition>

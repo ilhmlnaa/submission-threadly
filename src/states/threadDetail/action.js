@@ -12,6 +12,12 @@ const ActionType = {
   UP_VOTE_COMMENT: 'UP_VOTE_COMMENT',
   DOWN_VOTE_COMMENT: 'DOWN_VOTE_COMMENT',
   NEUTRAL_VOTE_COMMENT: 'NEUTRAL_VOTE_COMMENT',
+  UP_VOTE_THREAD_DETAIL_FAILURE: 'UP_VOTE_THREAD_DETAIL_FAILURE',
+  DOWN_VOTE_THREAD_DETAIL_FAILURE: 'DOWN_VOTE_THREAD_DETAIL_FAILURE',
+  NEUTRAL_VOTE_THREAD_DETAIL_FAILURE: 'NEUTRAL_VOTE_THREAD_DETAIL_FAILURE',
+  UP_VOTE_COMMENT_FAILURE: 'UP_VOTE_COMMENT_FAILURE',
+  DOWN_VOTE_COMMENT_FAILURE: 'DOWN_VOTE_COMMENT_FAILURE',
+  NEUTRAL_VOTE_COMMENT_FAILURE: 'NEUTRAL_VOTE_COMMENT_FAILURE',
 };
 
 function receiveThreadDetailActionCreator(threadDetail) {
@@ -95,6 +101,63 @@ function neutralVoteCommentActionCreator({ commentId, userId }) {
   };
 }
 
+function upVoteThreadDetailFailureActionCreator(userId) {
+  return {
+    type: ActionType.UP_VOTE_THREAD_DETAIL_FAILURE,
+    payload: {
+      userId,
+    },
+  };
+}
+
+function downVoteThreadDetailFailureActionCreator(userId) {
+  return {
+    type: ActionType.DOWN_VOTE_THREAD_DETAIL_FAILURE,
+    payload: {
+      userId,
+    },
+  };
+}
+
+function neutralVoteThreadDetailFailureActionCreator(userId) {
+  return {
+    type: ActionType.NEUTRAL_VOTE_THREAD_DETAIL_FAILURE,
+    payload: {
+      userId,
+    },
+  };
+}
+
+function upVoteCommentFailureActionCreator({ commentId, userId }) {
+  return {
+    type: ActionType.UP_VOTE_COMMENT_FAILURE,
+    payload: {
+      commentId,
+      userId,
+    },
+  };
+}
+
+function downVoteCommentFailureActionCreator({ commentId, userId }) {
+  return {
+    type: ActionType.DOWN_VOTE_COMMENT_FAILURE,
+    payload: {
+      commentId,
+      userId,
+    },
+  };
+}
+
+function neutralVoteCommentFailureActionCreator({ commentId, userId }) {
+  return {
+    type: ActionType.NEUTRAL_VOTE_COMMENT_FAILURE,
+    payload: {
+      commentId,
+      userId,
+    },
+  };
+}
+
 function asyncReceiveThreadDetail(threadId) {
   return async (dispatch) => {
     dispatch(showLoading());
@@ -134,7 +197,7 @@ function asyncUpVoteThreadDetail() {
       await api.upVoteThread(threadDetail.id);
     } catch (error) {
       toast.error(error.message);
-      dispatch(upVoteThreadDetailActionCreator(authUser.id));
+      dispatch(upVoteThreadDetailFailureActionCreator(authUser.id));
     }
   };
 }
@@ -148,7 +211,7 @@ function asyncDownVoteThreadDetail() {
       await api.downVoteThread(threadDetail.id);
     } catch (error) {
       toast.error(error.message);
-      dispatch(downVoteThreadDetailActionCreator(authUser.id));
+      dispatch(downVoteThreadDetailFailureActionCreator(authUser.id));
     }
   };
 }
@@ -162,7 +225,7 @@ function asyncNeutralVoteThreadDetail() {
       await api.neutralVoteThread(threadDetail.id);
     } catch (error) {
       toast.error(error.message);
-      dispatch(neutralVoteThreadDetailActionCreator(authUser.id));
+      dispatch(neutralVoteThreadDetailFailureActionCreator(authUser.id));
     }
   };
 }
@@ -176,7 +239,7 @@ function asyncUpVoteComment(commentId) {
       await api.upVoteComment({ threadId: threadDetail.id, commentId });
     } catch (error) {
       toast.error(error.message);
-      dispatch(upVoteCommentActionCreator({ commentId, userId: authUser.id }));
+      dispatch(upVoteCommentFailureActionCreator({ commentId, userId: authUser.id }));
     }
   };
 }
@@ -191,7 +254,7 @@ function asyncDownVoteComment(commentId) {
     } catch (error) {
       toast.error(error.message);
       dispatch(
-        downVoteCommentActionCreator({ commentId, userId: authUser.id })
+        downVoteCommentFailureActionCreator({ commentId, userId: authUser.id })
       );
     }
   };
@@ -209,7 +272,7 @@ function asyncNeutralVoteComment(commentId) {
     } catch (error) {
       toast.error(error.message);
       dispatch(
-        neutralVoteCommentActionCreator({ commentId, userId: authUser.id })
+        neutralVoteCommentFailureActionCreator({ commentId, userId: authUser.id })
       );
     }
   };
@@ -223,9 +286,15 @@ export {
   upVoteThreadDetailActionCreator,
   downVoteThreadDetailActionCreator,
   neutralVoteThreadDetailActionCreator,
+  upVoteThreadDetailFailureActionCreator,
+  downVoteThreadDetailFailureActionCreator,
+  neutralVoteThreadDetailFailureActionCreator,
   upVoteCommentActionCreator,
   downVoteCommentActionCreator,
   neutralVoteCommentActionCreator,
+  upVoteCommentFailureActionCreator,
+  downVoteCommentFailureActionCreator,
+  neutralVoteCommentFailureActionCreator,
   asyncReceiveThreadDetail,
   asyncCreateComment,
   asyncUpVoteThreadDetail,

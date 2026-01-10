@@ -6,9 +6,9 @@ import useInput from '../../hooks/useInput';
 
 function RegisterInput({ register, loading = false }) {
   const { t } = useTranslation();
-  const [name, onNameChange] = useInput('');
-  const [email, onEmailChange] = useInput('');
-  const [password, onPasswordChange] = useInput('');
+  const { value: name, onChange: onNameChange } = useInput('');
+  const { value: email, onChange: onEmailChange } = useInput('');
+  const { value: password, onChange: onPasswordChange } = useInput('');
 
   const onSubmit = (e) => {
     e.preventDefault();

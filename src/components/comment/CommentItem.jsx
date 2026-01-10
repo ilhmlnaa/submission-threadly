@@ -1,8 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import { ThumbsUp, ThumbsDown } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { postedAt } from '../../utils';
+import { postedAt, sanitizeHtml } from '../../utils';
+import {
+  asyncUpVoteComment,
+  asyncDownVoteComment,
+  asyncNeutralVoteComment,
+} from '../../states/threadDetail/action';
 
 function CommentItem({
   id,
@@ -11,11 +17,9 @@ function CommentItem({
   upVotesBy,
   downVotesBy,
   owner,
-  authUser,
-  upVote,
-  downVote,
-  neutralVote,
 }) {
+  const dispatch = useDispatch();
+  const authUser = useSelector((states) => states.authUser);
   const isUpVoted = authUser && upVotesBy.includes(authUser.id);
   const isDownVoted = authUser && downVotesBy.includes(authUser.id);
 
@@ -25,9 +29,9 @@ function CommentItem({
       return;
     }
     if (isUpVoted) {
-      neutralVote(id);
+      dispatch(asyncNeutralVoteComment(id));
     } else {
-      upVote(id);
+      dispatch(asyncUpVoteComment(id));
     }
   };
 
@@ -37,9 +41,9 @@ function CommentItem({
       return;
     }
     if (isDownVoted) {
-      neutralVote(id);
+      dispatch(asyncNeutralVoteComment(id));
     } else {
-      downVote(id);
+      dispatch(asyncDownVoteComment(id));
     }
   };
 
@@ -64,7 +68,7 @@ function CommentItem({
 
           <div
             className="text-gray-700 dark:text-gray-300 text-sm mb-3"
-            dangerouslySetInnerHTML={{ __html: content }}
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(content) }}
           />
 
           <div className="flex items-center space-x-4">
@@ -117,16 +121,6 @@ CommentItem.propTypes = {
   }).isRequired,
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  authUser: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-  }),
-  upVote: PropTypes.func.isRequired,
-  downVote: PropTypes.func.isRequired,
-  neutralVote: PropTypes.func.isRequired,
-};
-
-CommentItem.defaultProps = {
-  authUser: null,
 };
 
 export default CommentItem;

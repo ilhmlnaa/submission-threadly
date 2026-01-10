@@ -1,4 +1,5 @@
 import i18n from './i18n';
+import sanitizeHtml from './sanitizeHtml';
 
 function postedAt(date) {
   const now = new Date();
@@ -39,4 +40,4 @@ function setTheme(theme) {
   localStorage.setItem('theme', theme);
 }
 
-export { postedAt, truncateText, getTheme, setTheme };
+export { postedAt, truncateText, getTheme, setTheme, sanitizeHtml };

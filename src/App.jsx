@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { AnimatePresence } from 'framer-motion';
 import { Toaster } from 'react-hot-toast';
 import { changeLanguage } from './utils/i18n';
-import { Navigation, Loading, Footer } from './components';
+import { Loading } from './components';
+import { MainLayout, AuthLayout } from './layouts';
 import HomePage from './pages/HomePage';
 import DetailPage from './pages/DetailPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import LeaderboardsPage from './pages/LeaderboardsPage';
 import NotFoundPage from './pages/NotFoundPage';
-import { asyncPreloadProcess } from './states/shared/action';
+import { asyncPreloadProcess } from './states/isPreload/action';
 import { setThemeActionCreator } from './states/theme/action';
 import { setLanguageActionCreator } from './states/language/action';
 
@@ -24,7 +24,6 @@ function App() {
   } = useSelector((states) => states);
 
   const dispatch = useDispatch();
-  const location = useLocation();
 
   useEffect(() => {
     dispatch(asyncPreloadProcess());
@@ -55,35 +54,34 @@ function App() {
     return null;
   }
 
-  const isAuthPage =
-    location.pathname === '/login' || location.pathname === '/register';
-
   return (
     <>
       <Toaster />
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col transition-colors duration-300">
-        {!isAuthPage && (
-          <Navigation authUser={authUser} theme={theme} language={language} />
+      <Loading />
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<HomePage />} />
+        </Route>
+        <Route path="/threads/:id" element={<MainLayout />}>
+          <Route index element={<DetailPage />} />
+        </Route>
+        <Route path="/leaderboards" element={<MainLayout />}>
+          <Route index element={<LeaderboardsPage />} />
+        </Route>
+        {!authUser && (
+          <>
+            <Route path="/login" element={<AuthLayout />}>
+              <Route index element={<LoginPage />} />
+            </Route>
+            <Route path="/register" element={<AuthLayout />}>
+              <Route index element={<RegisterPage />} />
+            </Route>
+          </>
         )}
-        <Loading />
-        <main className="flex-1">
-          <AnimatePresence mode="wait">
-            <Routes location={location} key={location.pathname}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/threads/:id" element={<DetailPage />} />
-              <Route path="/leaderboards" element={<LeaderboardsPage />} />
-              {!authUser && (
-                <>
-                  <Route path="/login" element={<LoginPage />} />
-                  <Route path="/register" element={<RegisterPage />} />
-                </>
-              )}
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </AnimatePresence>
-        </main>
-        {!isAuthPage && <Footer />}
-      </div>
+        <Route path="*" element={<MainLayout />}>
+          <Route index element={<NotFoundPage />} />
+        </Route>
+      </Routes>
     </>
   );
 }

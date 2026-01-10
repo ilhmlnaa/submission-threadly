@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, ThumbsUp, ThumbsDown, MessageCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -10,31 +9,30 @@ import {
   PageTransition,
   ThreadDetailSkeleton,
 } from '../components';
-import { postedAt } from '../utils';
-import {
-  asyncReceiveThreadDetail,
-  asyncCreateComment,
-  asyncUpVoteThreadDetail,
-  asyncDownVoteThreadDetail,
-  asyncNeutralVoteThreadDetail,
-  asyncUpVoteComment,
-  asyncDownVoteComment,
-  asyncNeutralVoteComment,
-} from '../states/threadDetail/action';
+import { postedAt, sanitizeHtml } from '../utils';
+import useThreadDetail from '../hooks/useThreadDetail';
 
 function DetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { threadDetail = null, authUser = null } = useSelector(
-    (states) => states
-  );
-  const dispatch = useDispatch();
+  const {
+    threadDetail,
+    authUser,
+    fetchThreadDetail,
+    createComment,
+    upVoteThread,
+    downVoteThread,
+    neutralVoteThread,
+    upVoteComment,
+    downVoteComment,
+    neutralVoteComment,
+  } = useThreadDetail(id);
   const [isAddingComment, setIsAddingComment] = useState(false);
 
   useEffect(() => {
-    dispatch(asyncReceiveThreadDetail(id));
-  }, [id, dispatch]);
+    fetchThreadDetail();
+  }, [id, fetchThreadDetail]);
 
   const isUpVoted = authUser && threadDetail?.upVotesBy.includes(authUser.id);
   const isDownVoted =
@@ -51,7 +49,7 @@ function DetailPage() {
     }
 
     setIsAddingComment(true);
-    dispatch(asyncCreateComment({ threadId: id, content }))
+    createComment(content)
       .then(() => {
         toast.success(t('detailPage.commentAdded'));
       })
@@ -66,9 +64,9 @@ function DetailPage() {
       return;
     }
     if (isUpVoted) {
-      dispatch(asyncNeutralVoteThreadDetail());
+      neutralVoteThread();
     } else {
-      dispatch(asyncUpVoteThreadDetail());
+      upVoteThread();
     }
   };
 
@@ -78,22 +76,22 @@ function DetailPage() {
       return;
     }
     if (isDownVoted) {
-      dispatch(asyncNeutralVoteThreadDetail());
+      neutralVoteThread();
     } else {
-      dispatch(asyncDownVoteThreadDetail());
+      downVoteThread();
     }
   };
 
   const onUpVoteComment = (commentId) => {
-    dispatch(asyncUpVoteComment(commentId));
+    upVoteComment(commentId);
   };
 
   const onDownVoteComment = (commentId) => {
-    dispatch(asyncDownVoteComment(commentId));
+    downVoteComment(commentId);
   };
 
   const onNeutralVoteComment = (commentId) => {
-    dispatch(asyncNeutralVoteComment(commentId));
+    neutralVoteComment(commentId);
   };
 
   return (
@@ -147,7 +145,7 @@ function DetailPage() {
 
                 <div
                   className="prose prose-gray dark:prose-invert max-w-none mb-6"
-                  dangerouslySetInnerHTML={{ __html: threadDetail.body }}
+                  dangerouslySetInnerHTML={{ __html: sanitizeHtml(threadDetail.body) }}
                 />
 
                 <div className="flex items-center space-x-6 pt-4 border-t border-gray-200 dark:border-gray-700">

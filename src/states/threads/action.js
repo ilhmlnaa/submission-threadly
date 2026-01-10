@@ -1,6 +1,7 @@
 import toast from 'react-hot-toast';
 import { hideLoading, showLoading } from '@dimasmds/react-redux-loading-bar';
 import api from '../../utils/api';
+import { receiveUsersActionCreator } from '../users/action';
 
 const ActionType = {
   RECEIVE_THREADS: 'RECEIVE_THREADS',
@@ -8,6 +9,9 @@ const ActionType = {
   UP_VOTE_THREAD: 'UP_VOTE_THREAD',
   DOWN_VOTE_THREAD: 'DOWN_VOTE_THREAD',
   NEUTRAL_VOTE_THREAD: 'NEUTRAL_VOTE_THREAD',
+  UP_VOTE_THREAD_FAILURE: 'UP_VOTE_THREAD_FAILURE',
+  DOWN_VOTE_THREAD_FAILURE: 'DOWN_VOTE_THREAD_FAILURE',
+  NEUTRAL_VOTE_THREAD_FAILURE: 'NEUTRAL_VOTE_THREAD_FAILURE',
 };
 
 function receiveThreadsActionCreator(threads) {
@@ -58,6 +62,36 @@ function neutralVoteThreadActionCreator({ threadId, userId }) {
   };
 }
 
+function upVoteThreadFailureActionCreator({ threadId, userId }) {
+  return {
+    type: ActionType.UP_VOTE_THREAD_FAILURE,
+    payload: {
+      threadId,
+      userId,
+    },
+  };
+}
+
+function downVoteThreadFailureActionCreator({ threadId, userId }) {
+  return {
+    type: ActionType.DOWN_VOTE_THREAD_FAILURE,
+    payload: {
+      threadId,
+      userId,
+    },
+  };
+}
+
+function neutralVoteThreadFailureActionCreator({ threadId, userId }) {
+  return {
+    type: ActionType.NEUTRAL_VOTE_THREAD_FAILURE,
+    payload: {
+      threadId,
+      userId,
+    },
+  };
+}
+
 function asyncCreateThread({ title, body, category }) {
   return async (dispatch) => {
     dispatch(showLoading());
@@ -82,7 +116,7 @@ function asyncUpVoteThread(threadId) {
       await api.upVoteThread(threadId);
     } catch (error) {
       toast.error(error.message);
-      dispatch(upVoteThreadActionCreator({ threadId, userId: authUser.id }));
+      dispatch(upVoteThreadFailureActionCreator({ threadId, userId: authUser.id }));
     }
   };
 }
@@ -96,7 +130,7 @@ function asyncDownVoteThread(threadId) {
       await api.downVoteThread(threadId);
     } catch (error) {
       toast.error(error.message);
-      dispatch(downVoteThreadActionCreator({ threadId, userId: authUser.id }));
+      dispatch(downVoteThreadFailureActionCreator({ threadId, userId: authUser.id }));
     }
   };
 }
@@ -111,8 +145,25 @@ function asyncNeutralVoteThread(threadId) {
     } catch (error) {
       toast.error(error.message);
       dispatch(
-        neutralVoteThreadActionCreator({ threadId, userId: authUser.id })
+        neutralVoteThreadFailureActionCreator({ threadId, userId: authUser.id })
       );
+    }
+  };
+}
+
+function asyncPopulateUsersAndThreads() {
+  return async (dispatch) => {
+    dispatch(showLoading());
+    try {
+      const users = await api.getAllUsers();
+      const threads = await api.getAllThreads();
+
+      dispatch(receiveUsersActionCreator(users));
+      dispatch(receiveThreadsActionCreator(threads));
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      dispatch(hideLoading());
     }
   };
 }
@@ -124,6 +175,10 @@ export {
   upVoteThreadActionCreator,
   downVoteThreadActionCreator,
   neutralVoteThreadActionCreator,
+  upVoteThreadFailureActionCreator,
+  downVoteThreadFailureActionCreator,
+  neutralVoteThreadFailureActionCreator,
+  asyncPopulateUsersAndThreads,
   asyncCreateThread,
   asyncUpVoteThread,
   asyncDownVoteThread,
