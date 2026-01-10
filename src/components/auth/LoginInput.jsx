@@ -4,10 +4,16 @@ import { useTranslation } from 'react-i18next';
 import { Mail, Lock, Loader2 } from 'lucide-react';
 import useInput from '../../hooks/useInput';
 
-function LoginInput({ login, loading = false }) {
+function LoginInput({
+  login,
+  loading = false,
+  defaultEmail = '',
+  defaultPassword = '',
+}) {
   const { t } = useTranslation();
-  const { value: email, onChange: onEmailChange } = useInput('');
-  const { value: password, onChange: onPasswordChange } = useInput('');
+  const { value: email, onChange: onEmailChange } = useInput(defaultEmail);
+  const { value: password, onChange: onPasswordChange } =
+    useInput(defaultPassword);
 
   const onSubmit = (e) => {
     e.preventDefault();
