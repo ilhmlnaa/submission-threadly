@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { vi } from 'vitest';
 import i18n from '../utils/i18n';
 
-global.i18n = i18n;
+globalThis.i18n = i18n;
 
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({
