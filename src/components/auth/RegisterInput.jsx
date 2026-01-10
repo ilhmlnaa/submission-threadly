@@ -104,7 +104,7 @@ function RegisterInput({ register, loading = false }) {
             <span>{t('common.loading')}</span>
           </>
         ) : (
-          t('registerPage.login')
+          t('registerPage.createAccount')
         )}
       </button>
     </form>
