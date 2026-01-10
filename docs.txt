@@ -1,0 +1,2 @@
+https://storybook.js.org/recipes/react-i18next
+https://storybook.js.org/addons/storybook-dark-mode

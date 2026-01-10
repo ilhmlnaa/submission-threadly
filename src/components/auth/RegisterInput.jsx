@@ -4,11 +4,18 @@ import { useTranslation } from 'react-i18next';
 import { User, Mail, Lock, Loader2 } from 'lucide-react';
 import useInput from '../../hooks/useInput';
 
-function RegisterInput({ register, loading = false }) {
+function RegisterInput({
+  register,
+  loading = false,
+  defaultName = '',
+  defaultEmail = '',
+  defaultPassword = '',
+}) {
   const { t } = useTranslation();
-  const { value: name, onChange: onNameChange } = useInput('');
-  const { value: email, onChange: onEmailChange } = useInput('');
-  const { value: password, onChange: onPasswordChange } = useInput('');
+  const { value: name, onChange: onNameChange } = useInput(defaultName);
+  const { value: email, onChange: onEmailChange } = useInput(defaultEmail);
+  const { value: password, onChange: onPasswordChange } =
+    useInput(defaultPassword);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -112,8 +119,16 @@ function RegisterInput({ register, loading = false }) {
 }
 
 RegisterInput.propTypes = {
+  /** The register function that will be called when the form is submitted */
   register: PropTypes.func.isRequired,
+  /** The loading state of the registration process */
   loading: PropTypes.bool,
+  /** The default name value for the input */
+  defaultName: PropTypes.string,
+  /** The default email value for the input */
+  defaultEmail: PropTypes.string,
+  /** The default password value for the input */
+  defaultPassword: PropTypes.string,
 };
 
 export default RegisterInput;

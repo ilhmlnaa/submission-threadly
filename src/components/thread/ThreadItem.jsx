@@ -154,14 +154,23 @@ function ThreadItem({
 }
 
 ThreadItem.propTypes = {
+  /** The unique identifier of the thread */
   id: PropTypes.string.isRequired,
+  /** The title of the thread */
   title: PropTypes.string.isRequired,
+  /** The content of the thread (HTML string) */
   body: PropTypes.string.isRequired,
+  /** The category of the thread */
   category: PropTypes.string.isRequired,
+  /** The creation date of the thread in ISO format */
   createdAt: PropTypes.string.isRequired,
+  /** Array of user IDs who upvoted the thread */
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
+  /** Array of user IDs who downvoted the thread */
   downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
+  /** The total number of comments in the thread */
   totalComments: PropTypes.number.isRequired,
+  /** The user who created the thread */
   user: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

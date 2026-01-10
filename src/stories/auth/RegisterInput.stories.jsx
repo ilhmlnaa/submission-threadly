@@ -27,3 +27,12 @@ export const Loading = {
     loading: true,
   },
 };
+
+export const WithValues = {
+  args: {
+    loading: false,
+    defaultName: 'John Doe',
+    defaultEmail: 'john@example.com',
+    defaultPassword: 'password123',
+  },
+};

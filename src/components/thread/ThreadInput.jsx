@@ -6,9 +6,21 @@ import useInput from '../../hooks/useInput';
 
 function ThreadInput({ addThread, onCancel, loading = false }) {
   const { t } = useTranslation();
-  const { value: title, onChange: onTitleChange, setValue: setTitle } = useInput('');
-  const { value: body, onChange: onBodyChange, setValue: setBody } = useInput('');
-  const { value: category, onChange: onCategoryChange, setValue: setCategory } = useInput('');
+  const {
+    value: title,
+    onChange: onTitleChange,
+    setValue: setTitle,
+  } = useInput('');
+  const {
+    value: body,
+    onChange: onBodyChange,
+    setValue: setBody,
+  } = useInput('');
+  const {
+    value: category,
+    onChange: onCategoryChange,
+    setValue: setCategory,
+  } = useInput('');
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -125,8 +137,11 @@ function ThreadInput({ addThread, onCancel, loading = false }) {
 }
 
 ThreadInput.propTypes = {
+  /** The function that will be called when the form is submitted to add a new thread */
   addThread: PropTypes.func.isRequired,
+  /** The function that will be called when the cancel button is clicked */
   onCancel: PropTypes.func,
+  /** The loading state of the thread creation process */
   loading: PropTypes.bool,
 };
 

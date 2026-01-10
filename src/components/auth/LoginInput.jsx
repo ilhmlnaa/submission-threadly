@@ -89,8 +89,14 @@ function LoginInput({
 }
 
 LoginInput.propTypes = {
+  /** The login function that will be called when the form is submitted */
   login: PropTypes.func.isRequired,
+  /** The loading state of the login process */
   loading: PropTypes.bool,
+  /** The default email value for the input */
+  defaultEmail: PropTypes.string,
+  /** The default password value for the input */
+  defaultPassword: PropTypes.string,
 };
 
 export default LoginInput;
