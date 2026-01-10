@@ -1,10 +1,8 @@
 import React from 'react';
 import { fn } from 'storybook/test';
-import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
-import i18n from '../../utils/i18n';
 import ThreadItem from '../../components/thread/ThreadItem';
 
 // Mock store setup
@@ -33,9 +31,7 @@ export default {
     (Story) => (
       <Provider store={mockStore}>
         <MemoryRouter>
-          <I18nextProvider i18n={i18n}>
-            <Story />
-          </I18nextProvider>
+          <Story />
         </MemoryRouter>
       </Provider>
     ),
