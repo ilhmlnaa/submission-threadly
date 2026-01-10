@@ -9,8 +9,6 @@ on:
 jobs:
   automation-test-job:
     runs-on: ubuntu-latest
-    env:
-      DBUS_SESSION_BUS_ADDRESS: 'autolaunch:'
 
     strategy:
       matrix:
