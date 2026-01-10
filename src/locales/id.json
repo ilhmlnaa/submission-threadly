@@ -1,0 +1,103 @@
+{
+  "navigation": {
+    "home": "Beranda",
+    "leaderboards": "Papan Peringkat",
+    "logout": "Keluar",
+    "login": "Masuk",
+    "loggingOut": "Keluar...",
+    "forumApp": "Threadly"
+  },
+  "common": {
+    "pleaseLogin": "Silakan masuk untuk {{action}}",
+    "loading": "Memuat...",
+    "noThreads": "Belum ada thread. Jadilah yang pertama membuat thread!",
+    "noThreadsInCategory": "Tidak ada thread ditemukan di kategori ini.",
+    "pleaseLoginToVote": "Silakan masuk untuk memberikan suara",
+    "cancel": "Batal",
+    "submit": "Kirim",
+    "title": "Judul",
+    "category": "Kategori",
+    "content": "Konten",
+    "name": "Nama",
+    "email": "Email",
+    "password": "Kata Sandi",
+    "confirmPassword": "Konfirmasi Kata Sandi",
+    "writeYourComment": "Tulis komentar Anda...",
+    "writeYourThread": "Tulis thread Anda...",
+    "allCategories": "Semua Kategori"
+  },
+  "homePage": {
+    "discussions": "Diskusi",
+    "newThread": "Thread Baru",
+    "loginToPost": "Masuk untuk memposting",
+    "threadCreated": "Thread berhasil dibuat!"
+  },
+  "detailPage": {
+    "threadDetail": "Detail Thread",
+    "commentAdded": "Komentar berhasil ditambahkan!",
+    "backToHome": "Kembali ke Beranda",
+    "noComments": "Belum ada komentar. Jadilah yang pertama berkomentar!",
+    "comments": "Komentar"
+  },
+  "loginPage": {
+    "loginToForum": "Masuk ke Threadly",
+    "dontHaveAccount": "Belum punya akun?",
+    "register": "Daftar",
+    "loginSuccess": "Login berhasil!",
+    "loginFailed": "Login gagal. Silakan periksa email dan kata sandi Anda."
+  },
+  "registerPage": {
+    "createAccount": "Buat Akun",
+    "alreadyHaveAccount": "Sudah punya akun?",
+    "login": "Masuk",
+    "registerSuccess": "Pendaftaran berhasil!",
+    "registerFailed": "Pendaftaran gagal. Silakan coba lagi.",
+    "passwordMismatch": "Kata sandi tidak cocok"
+  },
+  "leaderboardsPage": {
+    "leaderboards": "Papan Peringkat",
+    "topContributors": "Kontributor Terbaik",
+    "rank": "Peringkat",
+    "user": "Pengguna",
+    "score": "Skor"
+  },
+  "threadItem": {
+    "upvotes": "Suara Naik",
+    "downvotes": "Suara Turun",
+    "comments": "Komentar"
+  },
+  "sidebar": {
+    "categories": "Kategori",
+    "trending": "Trending"
+  },
+  "footer": {
+    "rightsReserved": "Hak cipta dilindungi"
+  },
+  "authAside": {
+    "welcomeMessage": "Selamat datang di Threadly",
+    "joinCommunity": "Tempat terbaik untuk berbagi ide, bertanya, dan berdiskusi dengan komunitas yang hebat. Bergabunglah sekarang!"
+  },
+  "loading": {
+    "pleaseWait": "Mohon tunggu..."
+  },
+  "language": {
+    "switchLanguage": "Ganti Bahasa",
+    "english": "Inggris",
+    "indonesian": "Indonesia"
+  },
+  "commentsList": {
+    "noComments": "Belum ada komentar. Jadilah yang pertama berkomentar!"
+  },
+  "notFoundPage": {
+    "title": "Halaman Tidak Ditemukan",
+    "message": "Maaf, halaman yang Anda cari tidak ada atau telah dipindahkan ke alamat lain.",
+    "backToHome": "Kembali ke Beranda"
+  },
+  "postedAt": {
+    "daysAgo": "{{count}} hari yang lalu",
+    "hoursAgo": "{{count}} jam yang lalu",
+    "minutesAgo": "{{count}} menit yang lalu",
+    "secondsAgo": "{{count}} detik yang lalu",
+    "justNow": "baru saja"
+  }
+}

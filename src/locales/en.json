@@ -1,0 +1,103 @@
+{
+  "navigation": {
+    "home": "Home",
+    "leaderboards": "Leaderboards",
+    "logout": "Logout",
+    "login": "Login",
+    "loggingOut": "Logging out...",
+    "forumApp": "Threadly"
+  },
+  "common": {
+    "pleaseLogin": "Please login to {{action}}",
+    "loading": "Loading...",
+    "noThreads": "No threads yet. Be the first to create one!",
+    "noThreadsInCategory": "No threads found in this category.",
+    "pleaseLoginToVote": "Please login to vote",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "title": "Title",
+    "category": "Category",
+    "content": "Content",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "writeYourComment": "Write your comment...",
+    "writeYourThread": "Write your thread...",
+    "allCategories": "All Categories"
+  },
+  "homePage": {
+    "discussions": "Discussions",
+    "newThread": "New Thread",
+    "loginToPost": "Login to post",
+    "threadCreated": "Thread created successfully!"
+  },
+  "detailPage": {
+    "threadDetail": "Thread Detail",
+    "commentAdded": "Comment added successfully!",
+    "backToHome": "Back to Home",
+    "noComments": "No comments yet. Be the first to comment!",
+    "comments": "Comments"
+  },
+  "loginPage": {
+    "loginToForum": "Login to Threadly",
+    "dontHaveAccount": "Don't have an account?",
+    "register": "Register",
+    "loginSuccess": "Login successful!",
+    "loginFailed": "Login failed. Please check your email and password."
+  },
+  "registerPage": {
+    "createAccount": "Create Account",
+    "alreadyHaveAccount": "Already have an account?",
+    "login": "Login",
+    "registerSuccess": "Registration successful!",
+    "registerFailed": "Registration failed. Please try again.",
+    "passwordMismatch": "Passwords do not match"
+  },
+  "leaderboardsPage": {
+    "leaderboards": "Leaderboards",
+    "topContributors": "Top Contributors",
+    "rank": "Rank",
+    "user": "User",
+    "score": "Score"
+  },
+  "threadItem": {
+    "upvotes": "Upvotes",
+    "downvotes": "Downvotes",
+    "comments": "Comments"
+  },
+  "sidebar": {
+    "categories": "Categories",
+    "trending": "Trending"
+  },
+  "footer": {
+    "rightsReserved": "All rights reserved"
+  },
+  "authAside": {
+    "welcomeMessage": "Welcome to Threadly",
+    "joinCommunity": "The best place to share ideas, ask questions, and discuss with an amazing community. Join now!"
+  },
+  "loading": {
+    "pleaseWait": "Please wait..."
+  },
+  "language": {
+    "switchLanguage": "Switch Language",
+    "english": "English",
+    "indonesian": "Indonesian"
+  },
+  "commentsList": {
+    "noComments": "No comments yet. Be the first to comment!"
+  },
+  "notFoundPage": {
+    "title": "Page Not Found",
+    "message": "Sorry, the page you're looking for doesn't exist or has been moved to another location.",
+    "backToHome": "Back to Home"
+  },
+  "postedAt": {
+    "daysAgo": "{{count}} days ago",
+    "hoursAgo": "{{count}} hours ago",
+    "minutesAgo": "{{count}} minutes ago",
+    "secondsAgo": "{{count}} seconds ago",
+    "justNow": "just now"
+  }
+}
