@@ -1,5 +1,5 @@
 import React from 'react';
-import { fn } from 'storybook/test';
+import { fn } from '@storybook/test';
 import LoginInput from '../../components/auth/LoginInput';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export

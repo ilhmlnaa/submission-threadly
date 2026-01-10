@@ -1,5 +1,5 @@
 import React from 'react';
-import { fn } from 'storybook/test';
+import { fn } from '@storybook/test';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
