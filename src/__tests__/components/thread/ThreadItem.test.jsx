@@ -8,6 +8,7 @@
  *   - should navigate to detail page when thread is clicked
  */
 
+import React from 'react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -15,7 +16,6 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import ThreadItem from '../../../components/thread/ThreadItem';
-import { asyncUpVoteThread } from '../../../states/threads/action';
 
 const mockNavigate = vi.fn();
 

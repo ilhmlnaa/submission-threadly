@@ -8,16 +8,10 @@
 
 import { describe, it, beforeEach, afterEach, vi, expect } from 'vitest';
 import { configureStore } from '@reduxjs/toolkit';
-import { hideLoading, showLoading } from '@dimasmds/react-redux-loading-bar';
-import api from '../../../utils/api';
 import {
   asyncLoginUser,
   asyncRegisterUser,
   asyncLogoutUser,
-} from '../../../states/authUser/action';
-import {
-  setAuthUserActionCreator,
-  unsetAuthUserActionCreator,
 } from '../../../states/authUser/action';
 
 const fakeAuthUser = {
@@ -31,7 +25,7 @@ const fakeTokenResponse = 'fake-access-token';
 
 const createFakeStore = (initialState = {}) => {
   return configureStore({
-    reducer: (state = initialState, action) => state,
+    reducer: (state = initialState) => state,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   });
 };
@@ -65,7 +59,7 @@ describe('authUser thunk function', () => {
           }),
         });
 
-      const next = await store.dispatch(
+      await store.dispatch(
         asyncLoginUser({
           email: 'john@example.com',
           password: 'password123',
@@ -107,7 +101,7 @@ describe('authUser thunk function', () => {
         }),
       });
 
-      const next = await store.dispatch(
+      await store.dispatch(
         asyncRegisterUser({
           name: 'John Doe',
           email: 'john@example.com',

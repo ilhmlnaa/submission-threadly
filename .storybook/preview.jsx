@@ -5,7 +5,7 @@ import i18n from '../src/utils/i18n';
 import '../src/index.css';
 
 /** @type { import('@storybook/react-vite').Preview } */
-const withI18n = (Story, context) => {
+const WithI18n = (Story, context) => {
   const { locale } = context.globals;
   const isDarkMode = useDarkMode();
 
@@ -45,7 +45,7 @@ export const globalTypes = {
   },
 };
 
-export const decorators = [withI18n];
+export const decorators = [WithI18n];
 
 const preview = {
   parameters: {

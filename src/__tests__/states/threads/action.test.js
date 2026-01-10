@@ -8,19 +8,10 @@
 
 import { describe, it, beforeEach, afterEach, vi, expect } from 'vitest';
 import { configureStore } from '@reduxjs/toolkit';
-import { hideLoading, showLoading } from '@dimasmds/react-redux-loading-bar';
-import api from '../../../utils/api';
 import {
   asyncCreateThread,
   asyncUpVoteThread,
   asyncPopulateUsersAndThreads,
-} from '../../../states/threads/action';
-import {
-  addThreadActionCreator,
-  upVoteThreadActionCreator,
-  upVoteThreadFailureActionCreator,
-  receiveThreadsActionCreator,
-  receiveUsersActionCreator,
 } from '../../../states/threads/action';
 
 const fakeThreadsResponse = [
@@ -67,7 +58,7 @@ const fakeThreadResponse = {
 
 const createFakeStore = (initialState = {}) => {
   return configureStore({
-    reducer: (state = initialState, action) => state,
+    reducer: (state = initialState) => state,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   });
 };
@@ -95,7 +86,7 @@ describe('threads thunk function', () => {
         }),
       });
 
-      const next = await store.dispatch(
+      await store.dispatch(
         asyncCreateThread({
           title: 'Thread Baru',
           body: 'Ini adalah thread baru',
@@ -116,7 +107,7 @@ describe('threads thunk function', () => {
         }),
       });
 
-      const next = await store.dispatch(asyncUpVoteThread('thread-1'));
+      await store.dispatch(asyncUpVoteThread('thread-1'));
 
       expect(global.fetch).toHaveBeenCalled();
     });
@@ -150,7 +141,7 @@ describe('threads thunk function', () => {
           }),
         });
 
-      const next = await store.dispatch(asyncPopulateUsersAndThreads());
+      await store.dispatch(asyncPopulateUsersAndThreads());
 
       expect(global.fetch).toHaveBeenCalledTimes(2);
     });
