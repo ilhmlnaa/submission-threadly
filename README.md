@@ -174,10 +174,10 @@ Menggunakan [Dicoding Forum API](https://forum-api.dicoding.dev/v1/)
 
 ### CI/CD
 GitHub Actions workflow (`.github/workflows/ci.yml`):
+- Install dependencies
 - Linting check
-- Unit & integration tests
-- E2E tests
-- Build verification
+- CI Tests (unit & E2E)
+
 
 ## Author
 
