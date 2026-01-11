@@ -47,8 +47,8 @@ describe('Login spec', () => {
   });
   // Di sini saya komentari karna server backend nya kena bot protection/WAF AWS saat di hit dari github action/vps saja, tapi di lokal aman
   // it('should display homepage when email and password are correct', () => {
-  //   cy.get('input[placeholder="your@email.com"]').type('ilham@hamdiv.me');
-  //   cy.get('input[type="password"]').type('ilham789');
+  //   cy.get('input[placeholder="your@email.com"]').type('samsul23@gmail.com');
+  //   cy.get('input[type="password"]').type('samsul123');
 
   //   cy.get('button')
   //     .contains(/^Login$/)
