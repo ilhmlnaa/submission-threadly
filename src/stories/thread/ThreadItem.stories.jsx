@@ -5,7 +5,6 @@ import { MemoryRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import ThreadItem from '../../components/thread/ThreadItem';
 
-// Mock store setup
 const mockStore = configureStore({
   reducer: (
     state = {
@@ -13,13 +12,12 @@ const mockStore = configureStore({
         id: 'user-1',
         name: 'John Doe',
         email: 'john@example.com',
-        avatar: 'https://generated-image-url.jpg',
+        avatar: 'https://i.pravatar.cc/300',
       },
     }
   ) => state,
 });
 
-// More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
   title: 'Thread/ThreadItem',
   component: ThreadItem,
@@ -38,7 +36,6 @@ export default {
   ],
 };
 
-// Fake thread data
 const fakeThread = {
   id: 'thread-1',
   title: 'Thread Pertama',
@@ -51,11 +48,10 @@ const fakeThread = {
   user: {
     id: 'user-1',
     name: 'John Doe',
-    avatar: 'https://generated-image-url.jpg',
+    avatar: 'https://i.pravatar.cc/300',
   },
 };
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Default = {
   args: {
     ...fakeThread,

@@ -1,7 +1,6 @@
 import { fn } from '@storybook/test';
 import LoginInput from '../../components/auth/LoginInput';
 
-// More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
   title: 'Auth/LoginInput',
   component: LoginInput,
@@ -14,7 +13,6 @@ export default {
   },
 };
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Default = {
   args: {
     loading: false,
